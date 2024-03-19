@@ -72,10 +72,16 @@ if __name__ == '__main__':
         # print(get_recipes_optimized(food.split(",")))
         # print(powerset(food.split(",")))
         dfs = []
-        for i in powerset(food.split(",")):
-            if len(i) > 3:
+        food_list = food.split(",")
+        if len(food_list) >= 3:
+            for i in powerset():
+                if len(i) >= 3:
+                    dfs.append(get_recipes_optimized(i))
+            print(reduce(lambda x, y: x.merge(y, how='outer', on=['title','link']), dfs))
+        else: 
+            for i in powerset():
                 dfs.append(get_recipes_optimized(i))
-        print(reduce(lambda x, y: x.merge(y, how='outer', on=['title','link']), dfs))
+            print(reduce(lambda x, y: x.merge(y, how='outer', on=['title','link']), dfs))
 
     
 # def process_1K():
