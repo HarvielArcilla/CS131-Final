@@ -83,9 +83,8 @@ if __name__ == '__main__':
                     dfs.append(get_recipes_optimized(i))
             print(reduce(lambda x, y: x.merge(y, how='outer', on=['title','link']), dfs))
         else: 
-            for i in powerset(food_list):
-                dfs.append(get_recipes_optimized(i))
-            print(reduce(lambda x, y: x.merge(y, how='outer', on=['title','link']), dfs))
+            print(get_recipes_optimized(food_list))
+
 
     
 # def process_1K():
