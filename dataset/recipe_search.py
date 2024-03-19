@@ -35,6 +35,8 @@ def process_optimized_1K():
 
 def process_optimized_full():
     df = pd.read_csv('full_dataset.csv')
+    with open('full_dataset.pkl', 'wb') as fi:
+        pickle.dump(df, fi)
     freq = {}
     for i in range(df.shape[0]):
         for ing in df["NER"][i].lower().replace('[', '').replace(']', '').replace('\"', '').replace(', ', ',').split(","):
@@ -62,7 +64,8 @@ def initialize_optimized_1K():
     return df, freq
 
 def initialize_optimized_full():
-    df = pd.read_csv('full_dataset.csv')
+    # df = pd.read_csv('full_dataset.csv')
+    df = pd.read_pickle('full_dataset.pkl')
     with open('prcomputed_indices_full.pkl', 'rb') as f:
         freq = pickle.load(f)
     return df, freq
@@ -96,7 +99,7 @@ if __name__ == '__main__':
     #     food = input("Enter a food (Use commas w/o space): ")
     #     print(get_recipes(food.split(",")))
     
-    process_optimized_full()
+    # process_optimized_full()
     df, freq = initialize_optimized_full()
     while True:
         food = input("Enter a food (Use commas w/o space): ")
