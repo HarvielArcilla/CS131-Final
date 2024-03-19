@@ -24,12 +24,10 @@ def process_optimized_full():
     return df, freq
 
 
-
 def initialize_full():
     df = pd.read_csv('full_dataset.csv')
     d = np.load('full_IGS.npy', allow_pickle=True)
     return df, d
-
 
 
 def initialize_optimized_full():
@@ -38,15 +36,18 @@ def initialize_optimized_full():
         freq = pickle.load(f)
     return df, freq
 
+
 # from itertools
 def powerset(iterable):
     "powerset([1,2,3]) → () (1,) (2,) (3,) (1,2) (1,3) (2,3) (1,2,3)"
     s = list(iterable)
     return list(chain.from_iterable(combinations(s, r) for r in range(len(s)+1)))
 
+
 def get_indices(ing_list):
     ingredients = set(ing_list)
     return np.where([ingredients.issubset(x) for x in d])
+
 
 def get_indices_optimized(ing_list):
     if set(ing_list).issubset(freq.keys()):
@@ -56,13 +57,16 @@ def get_indices_optimized(ing_list):
         return base
     else: return []
 
+
 def get_recipes(ing_list):
     indices = get_indices(ing_list)
     return df.loc[indices[0], ["title", "link"]]
 
+
 def get_recipes_optimized(ing_list):
     indices = get_indices_optimized(ing_list)
     return df.loc[indices, ["title", "link"]]
+
 
 if __name__ == '__main__':
     # process_optimized_full()
@@ -74,12 +78,12 @@ if __name__ == '__main__':
         dfs = []
         food_list = food.split(",")
         if len(food_list) >= 3:
-            for i in powerset():
+            for i in powerset(food_list):
                 if len(i) >= 3:
                     dfs.append(get_recipes_optimized(i))
             print(reduce(lambda x, y: x.merge(y, how='outer', on=['title','link']), dfs))
         else: 
-            for i in powerset():
+            for i in powerset(food_list):
                 dfs.append(get_recipes_optimized(i))
             print(reduce(lambda x, y: x.merge(y, how='outer', on=['title','link']), dfs))
 
