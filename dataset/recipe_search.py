@@ -36,6 +36,14 @@ def initialize_optimized_full():
         freq = pickle.load(f)
     return df, freq
 
+def initialize_optimized(rel_path):
+    df_pkl = pd.read_pickle(rel_path + 'full_dataset.pkl')
+    with open(rel_path + 'prcomputed_indices_full.pkl', 'rb') as f:
+        freq_pkl = pickle.load(f)
+    global df 
+    df = df_pkl
+    global freq 
+    freq = freq_pkl
 
 # from itertools
 def powerset(iterable):
