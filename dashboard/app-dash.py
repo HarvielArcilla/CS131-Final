@@ -119,7 +119,7 @@ def parse_contents(contents, filename, date):
             html.H1(f"{num_ingredients} ingredient{'s' if num_ingredients > 1 else ''} processed", style={'fontFamily': font}),
             html.H5(filename),
             html.Img(src=bounding_box, style={
-            'height': '60vh',
+            'width': '50vw',
             }),
         ], style={'textAlign': 'center', 'width': '100%', 'height': '100%'}),
         html.Div([

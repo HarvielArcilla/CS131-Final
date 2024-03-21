@@ -12,7 +12,7 @@ def get_ingredients(rel_path, img):
 
     # 2) Run prediction on chosen test image
     test_image = "images/veggies2.jpg"
-    results = trained(img, conf=0.01)
+    results = trained(img, conf=0.03)
     class_list = None
     im_rgb = None
     # 3) Print and save test image
