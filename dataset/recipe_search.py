@@ -95,39 +95,39 @@ if __name__ == '__main__':
 
 
     
-# def process_1K():
-#     df = pd.read_csv('1K_dataset.csv')
-#     df["IGS"] = df["NER"].apply(lambda x: set(x.lower().replace('[', '').replace(']', '').replace('\"', '').replace(', ', ',').split(",")))
-#     d = df["IGS"].values
-#     np.save('1K_IGS', d)
-#     return d
+def process_1K():
+    df = pd.read_csv('1K_dataset.csv')
+    df["IGS"] = df["NER"].apply(lambda x: set(x.lower().replace('[', '').replace(']', '').replace('\"', '').replace(', ', ',').split(",")))
+    d = df["IGS"].values
+    np.save('1K_IGS', d)
+    return d
 
-# def process_full():
-#     df = pd.read_csv('full_dataset.csv')
-#     df["IGS"] = df["NER"].apply(lambda x: set(x.lower().replace('[', '').replace(']', '').replace('\"', '').replace(', ', ',').split(",")))
-#     d = df["IGS"].values
-#     np.save('full_IGS', d)
-#     return d
+def process_full():
+    df = pd.read_csv('full_dataset.csv')
+    df["IGS"] = df["NER"].apply(lambda x: set(x.lower().replace('[', '').replace(']', '').replace('\"', '').replace(', ', ',').split(",")))
+    d = df["IGS"].values
+    np.save('full_IGS', d)
+    return d
 
-# def process_optimized_1K():
-#     df = pd.read_csv('1K_dataset.csv')
-#     freq = {}
-#     for i in range(df.shape[0]):
-#         for ing in df["NER"][i].lower().replace('[', '').replace(']', '').replace('\"', '').replace(', ', ',').split(","):
-#             if ing in freq: freq[ing].append(i)
-#             else: freq[ing] = [i]
-#         print(i)
-#     with open('prcomputed_indices_1K.pkl', 'wb') as f:
-#         pickle.dump(freq, f)
-#     return df, freq
+def process_optimized_1K():
+    df = pd.read_csv('1K_dataset.csv')
+    freq = {}
+    for i in range(df.shape[0]):
+        for ing in df["NER"][i].lower().replace('[', '').replace(']', '').replace('\"', '').replace(', ', ',').split(","):
+            if ing in freq: freq[ing].append(i)
+            else: freq[ing] = [i]
+        print(i)
+    with open('prcomputed_indices_1K.pkl', 'wb') as f:
+        pickle.dump(freq, f)
+    return df, freq
 
-# def initialize_1K():
-#     df = pd.read_csv('1K_dataset.csv')
-#     d = np.load('1k_IGS.npy', allow_pickle=True)
-#     return df, d
+def initialize_1K():
+    df = pd.read_csv('1K_dataset.csv')
+    d = np.load('1k_IGS.npy', allow_pickle=True)
+    return df, d
 
-# def initialize_optimized_1K():
-#     df = pd.read_csv('full_dataset.csv')
-#     with open('prcomputed_indices_1K.pkl', 'rb') as f:
-#         freq = pickle.load(f)
-#     return df, freq
+def initialize_optimized_1K():
+    df = pd.read_csv('full_dataset.csv')
+    with open('prcomputed_indices_1K.pkl', 'rb') as f:
+        freq = pickle.load(f)
+    return df, freq
